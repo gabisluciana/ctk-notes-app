@@ -35,6 +35,9 @@ class App(ctk.CTk):
         # Load buttons for any existing notes into the sidebar
         self.load_notes()
 
+        # Model window for deleting notes
+        self.confirm_delete = None
+
     def new_note(self):
         self.current_note_id = None
         self.main_window.title.delete(0, ctk.END)
@@ -67,6 +70,14 @@ class App(ctk.CTk):
             nt.delete_note(self.current_note_id)
             self.load_notes()
             self.new_note()
+            self.confirm_delete.destroy()
+
+    def confirm_delete_note(self):
+        if self.current_note_id is not None:
+            if self.confirm_delete is None or not self.confirm_delete.winfo_exists():
+                self.confirm_delete = ConfirmDelete(self)  # create window if its None or destroyed
+            else:
+                self.confirm_delete.focus()  # if window exists focus it
 
     def load_note_content(self, note_id):
         note = nt.get_note(note_id)

@@ -33,7 +33,7 @@ class Sidebar(ctk.CTkFrame):
             fg_color="#C73E1D",
             hover_color="#8C2D15",
             font=self.winfo_toplevel().button_font,
-            command=self.winfo_toplevel().delete_note,
+            command=self.winfo_toplevel().confirm_delete_note,
             state="disabled",
         )
         self.delete_note_btn.grid(column=0, row=2, padx=10, pady=5)
